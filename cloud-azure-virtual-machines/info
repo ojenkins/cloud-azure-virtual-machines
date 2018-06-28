@@ -1,5 +1,5 @@
 NAME=com.opsview.opspack.cloud_azure_virtual_machines
-VERSION=1.1
+VERSION=2.0
 ALIAS=Cloud - Azure - Virtual Machines
 DEPENDENCIES=
-OPSVIEW_MIN_VERSION=
+OPSVIEW_MIN_VERSION=6.0.0
