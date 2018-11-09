@@ -23,9 +23,7 @@ Opsview Monitor's Azure Virtual Machines Opspack provides all the latest metrics
 
 ## Prerequisites
 
-The monitoring plugin for this Opspack has been tested with Python 2.7. In order for the Opspack to run, you will need to have some Python packages installed by running the pip python package tool.
-
-If a cryptography error occurs when trying to install the Azure packages, you can run the commands which should fix the problem.
+The monitoring plugin for this Opspack has been tested with Python 2.7. In order for the Opspack to run, you will need to have the libraries and Python packages listed below installed on Opsview Master.
 
 **Debian and Ubuntu**
 
@@ -74,8 +72,9 @@ The Tenant/Directory ID can be found in the **Azure Active Directory** under the
 
 #### Step 3: Find the Client/Application ID for your application
 
-You need to create and register your application if you haven't already. Use the following documentation from Microsoft: [Create an Azure Active Directory application](
+To allow programmatic access for monitoring, you need to create and register an application if you haven't already done so. Use the following documentation from Microsoft: [Create an Azure Active Directory application](
 https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal#create-an-azure-active-directory-application)
+When creating the Active Directory application, you can set the Sign-on URL to any dummy value, as this value is not used.
 
 The Client/Application ID can be found in **Azure Active Directory** under the **App registrations** section from the Azure dashboard
 
@@ -109,11 +108,26 @@ If you are running more than one subscription these steps will need to be done f
 
 To configure and utilize this Opspack, you simply need to add the 'Cloud - Azure - Virtual Machines' Opspack to your Opsview Monitor system
 
-#### Step 1: Add the host template
+#### Step 1: Import the Opspack
+
+Download the *cloud-azure-virtual-machines.opspack* file from the **Releases** section of this repository.
+Navigate to **Host Template Settings** inside Opsview Monitor and select **Import Opspack** in the top left corner.
+
+![Add Variables](/docs/img/host-template-settings.png?raw=true)
+
+Then click **Browse** and select the *cloud-azure-virtual-machines.opspack* file. Click **Upload** and then click **Import** when the file is uploaded.
+You may see a 'CONFLICT' warning message after uploading - this is because all 'Cloud - Azure' Opspacks utilize the same variable (AZURE_CREDENTIALS) for authorizing access to your resources. Just click **Overwrite** and the Opspack should import successfully.
+
+![Add Variables](/docs/img/import-opspack.png?raw=true)
+
+#### Step 2: Add the host template
+
+Add the host template for Cloud - Azure - Virtual Machines.
+Set the **Primary Hostname/IP** field with the name of the host in Azure, and then open the **Advanced** section at the bottom and change the **Host Check Command** type to *TCP Port 80 (HTTP)*. If the hostname or IP cannot be resolved, Opsview Monitor may report the host as Down by default, to fix this you may need to enable a local DNS permitting resolution of the hostname to an IP address, or add the hostname and the VM's IP to the /etc/hosts file on Opsview Master. Alternatively, if the resource has no hostname or public IP, then change **Host Check Command** to *Always assumed to be UP*.
 
 ![Add Host Template](/docs/img/host-template.png?raw=true)
 
-#### Step 2: Add and configure variables required for this host
+#### Step 3: Add and configure variables required for this host
 
 Add 'AZURE_CREDENTIALS' to the host and set the **Resource Group** as its variable value
 
@@ -121,6 +135,6 @@ Then override the Subscription ID, Client ID, Secret Key and Tenant ID
 
 ![Add Variables](/docs/img/variable.png?raw=true)
 
-#### Step 3: Reload and the system will now be monitored
+#### Step 4: Reload and the system will now be monitored
 
 ![View Output](/docs/img/output.png?raw=true)
