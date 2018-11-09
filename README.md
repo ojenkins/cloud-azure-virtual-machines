@@ -1,4 +1,4 @@
-# Azure - Virtual Machines Opspack
+# Cloud - Azure - Virtual Machines Opspack
 
 Azure Virtual Machines gives you the flexibility of virtualization for a wide range of computing solutions including development and testing, running applications, and extending your data centre. With the power to deploy applications instantly, Azure enhances security measures, provides flexibility to operate within multiple environments and scales depending on your needs.
 
