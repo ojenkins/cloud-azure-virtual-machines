@@ -96,11 +96,13 @@ Navigate to the **Subscriptions** section and select the Subscription you select
 
 In the Subscription to be monitored, click **Access Control (IAM)**
 
-Then click the **Add** button, select **Reader** and **Monitoring Contributor** and select the application
+Then click the **Add** button, select **Reader** and select the application
 
 ![Add Subscription to Application](/docs/img/azure_add_subscription_1.png?raw=true)
 
 ![Add Subscription to Application](/docs/img/azure_add_subscription_2.png?raw=true)
+
+Then repeat this process, but give the application the **Monitoring Contributor** role as well.
 
 If you are running more than one subscription these steps will need to be done for each one you wish to monitor.
 
